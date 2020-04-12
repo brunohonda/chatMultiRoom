@@ -5,19 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client socket</title>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <input type="text" id="room" /><button id="connect">Connectar</button>
-    <form id="chat">
-        <div class="messages" id="messages"></div>
-        <input type="text" id="username" placeholder="Digite seu usuário" />
-        <input type="text" id="message" placeholder="Digite sua mensagem" />
-        <button type="submit">Enviar</button>
-    </form>
+    <div class="tab-content">
+        <div class="tab-pane fade" id="login-tab" role="tabpanel" aria-labelledby="login-tab">
+            <div class="page d-flex justify-content-center align-items-center">
+                <form id="connect" class="card text-white bg-secondary">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>User:</label>
+                            <input type="text" class="form-control" id="username" required autofocus />
+                        </div>
+                        <div class="form-group">
+                            <label>Room:</label>
+                            <input type="text" class="form-control" id="room" required />
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary float-right">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="chat-tab" role="tabpanel" aria-labelledby="chat-tab">
+            <div class="page d-flex flex-column">
+                <div class="flex-grow-1 overflow-auto" id="messages"></div>
+                <div class="bg-primary p-2">
+                    <form class="form-inline" id="chat">
+                        <input class="form-control flex-grow-1 mr-sm-2" id="message" type="text" placeholder="Type your message">
+                        <button class="btn btn-light my-2 my-sm-0" type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="js/chat.js"></script>
 </body>
 </html>
