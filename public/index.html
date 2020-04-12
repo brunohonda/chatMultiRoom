@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client socket</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <input type="text" id="room" /><button id="connect">Connectar</button>
+    <form id="chat">
+        <div class="messages" id="messages"></div>
+        <input type="text" id="username" placeholder="Digite seu usuário" />
+        <input type="text" id="message" placeholder="Digite sua mensagem" />
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.min.js" integrity="sha256-WKvqiY0jZHWQZIohYEmr9KUC5rEaYEOFTq+ByllJK8w=" crossorigin="anonymous"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>
