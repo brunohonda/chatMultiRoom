@@ -19,6 +19,7 @@ function connect(event) {
 
     socket.on('response', renderMessage);
 
+    $('#message').focus();
     showTab('chat-tab');
 }
 
@@ -46,7 +47,11 @@ function renderMessage(data) {
 function load() {
     document.getElementById('connect').addEventListener('submit', connect);
     document.getElementById('chat').addEventListener('submit', sendMessage);
+    $('#username').focus();
     showTab('login-tab');
 }
 
 document.addEventListener("DOMContentLoaded", load, false);
+$( document ).ready(function() {
+    load();
+});
