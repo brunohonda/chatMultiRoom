@@ -1,11 +1,10 @@
 const express = require('express');
 const path = require('path');
+const config = require('./src/config');
 
 const app = express();
 const server = require('http').createServer(app);
 const sockets = require('socket.io')(server);
-
-const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'public'));
@@ -24,6 +23,6 @@ sockets.on('connection', (socket) => {
     });
 });
 
-server.listen(port, () => {
-    console.log(`Listen port ${port}`);
+server.listen(config.app.port, () => {
+    console.log(`Listen port ${config.app.port}`);
 });
