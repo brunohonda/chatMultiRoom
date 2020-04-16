@@ -46,10 +46,9 @@ function renderMessage(data) {
 }
 
 function renderUsers(data) {
-    const element = $('#users')
-    console.log(data);
+    $('#users').empty();
     data.forEach(roomUser => {
-        element.append(`
+        $('#users').append(`
         <div class="card m-2">
             <div class="row no-gutters">
                 <div class="col-md-2">
