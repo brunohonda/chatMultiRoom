@@ -15,7 +15,7 @@ function connect(event) {
     if (socket && socket.connected) {
         socket.disconnect();
     }
-    socket = io('http://localhost:3000', { query: { room }});
+    socket = io('http://localhost:3000', { query: { room, user }});
 
     socket.on('response', renderMessage);
 
