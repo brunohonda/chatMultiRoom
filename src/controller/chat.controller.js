@@ -1,31 +1,48 @@
 const Room = require('../model/room');
 const User = require('../model/user');
 
+function findUser(socket) {
+    if (!socket.handshake.query.user) {
+        throw new Error('Identity not informed');
+    }
+
+    return User.findOneAndUpdate(
+        { internalReference: socket.handshake.query.user },
+        { internalReference: socket.handshake.query.user },
+        { upsert: true, new: true }
+    );
+}
+
+function findRoom(socket, user) {
+    if (!socket.handshake.query.room) {
+        throw new Error('Room not found');
+    }
+
+    return Room.findByIdAndUpdate(
+        socket.handshake.query.room,
+        { $addToSet: { users: user } },
+        { upsert: true, new: true }
+    );
+}
+
+async function joinToRoom(socket) {
+    try {
+        const user = await findUser(socket);
+        const room = await findRoom(socket, user);
+        const users = await User.find({ _id: { $in: room.users }});
+        const namespace = await socket.join(room._id).emit('roomUsers', users);
+        
+        socket.to(socket.handshake.query.room).emit('roomUsers', users);
+        return namespace;
+    } catch(error) {
+        socket.disconnect(true);
+    }
+}
+
 module.exports = (sockets) => {
     return {
         connection: async (socket) => {
-            const user = await User.findOneAndUpdate(
-                { internalReference: socket.handshake.query.user },
-                { internalReference: socket.handshake.query.user },
-                { upsert: true, new: true }
-            );
-
-            let room;
-            
-            try {
-                room = await Room.findByIdAndUpdate(
-                    socket.handshake.query.room,
-                    { $addToSet: { users: user } },
-                    { upsert: true, new: true }
-                );
-            } catch(e) {
-                socket.disconnect(true);
-                return;
-            }
-
-            const users = await User.find({ _id: { $in: room.users }});
-            
-            socket.join(room._id).emit('roomUsers', users);
+            await joinToRoom(socket);
             
             socket.on('message', (data) => {
                 sockets.to(socket.handshake.query.room).emit('response', data);
