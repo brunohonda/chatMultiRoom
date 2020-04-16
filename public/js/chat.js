@@ -18,6 +18,7 @@ function connect(event) {
     socket = io('http://localhost:3000', { query: { room, user }});
 
     socket.on('response', renderMessage);
+    socket.on('roomUsers', renderUsers);
 
     $('#message').focus();
     showTab('chat-tab');
@@ -42,6 +43,27 @@ function renderMessage(data) {
         </div>
     </div>
     `);
+}
+
+function renderUsers(data) {
+    const element = $('#users')
+    console.log(data);
+    data.forEach(roomUser => {
+        element.append(`
+        <div class="card m-2">
+            <div class="row no-gutters">
+                <div class="col-md-2">
+                    <img src="https://picsum.photos/64" class="card-img" alt="avatar">
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body p-0">
+                    <h5 class="card-title" style="margin: .65rem">${roomUser.internalReference}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `);
+    });
 }
 
 function load() {
