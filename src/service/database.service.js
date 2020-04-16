@@ -5,9 +5,12 @@ mongoose.connect(
     `mongodb://${config.mongo.user}:${config.mongo.password}@${config.mongo.host}:${config.mongo.port}/${config.mongo.database}`,
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
     }
 );
-console.log(mongoose.connection.readyState);
+
+mongoose.connection.once('open', () => console.log('Database connected'));
 
 module.exports = mongoose.connection;
