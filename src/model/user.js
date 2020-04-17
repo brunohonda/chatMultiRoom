@@ -6,9 +6,18 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
+    online: Boolean,
     avatar: {
         type: String,
         required: false
+    },
+    lastConnection: {
+        type: Date,
+        default: Date.now
+    },
+    lastDisconnection: {
+        reason: String,
+        datetime: Date
     }
 });
 

@@ -8,7 +8,7 @@ function findUser(socket) {
 
     return User.findOneAndUpdate(
         { internalReference: socket.handshake.query.user },
-        { internalReference: socket.handshake.query.user },
+        { online: true, lastConnection: new Date() },
         { upsert: true, new: true }
     );
 }
