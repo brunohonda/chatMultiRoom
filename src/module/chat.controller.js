@@ -44,7 +44,17 @@ module.exports = (sockets) => {
         connection: async (socket) => {
             await joinToRoom(socket);
             
-            socket.on('message', (data) => {
+            socket.on('message', async (data) => {
+                Room.findByIdAndUpdate(
+                    socket.handshake.query.room,
+                    {
+                        $push: {
+                            messages: {
+                                $each: [{ user: { _id: '5e9a4d4f9d4c2d0006edb33a' }, text: data.message }]
+                            }
+                        }
+                    }
+                );
                 sockets.to(socket.handshake.query.room).emit('response', data);
             });
         }
