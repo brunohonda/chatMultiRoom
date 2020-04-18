@@ -10,6 +10,6 @@ module.exports = {
         database: process.env.MONGO_DB_NAME || 'rankdone-chat'
     },
     jwt: {
-        secret: process.env.JWT_SECRET || 'your-256-bit-secret'
+        secret: process.env.JWT_SECRET || 'Ngo5nIuzY7Wcva8GT3baL4EYcADP6AOt'
     }
 };
