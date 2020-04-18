@@ -3,7 +3,7 @@ db = db.getSiblingDB('rankdone-chat')
 db.createUser(
     {
         user: 'rankdone',
-        pwd: 'r4bb1TmqR4nkD0n3',
+        pwd: 'vgrp0RBDvWAFU4mHytUqthssMlXHKgfV',
         roles: [
             {
                 role: 'readWrite',
