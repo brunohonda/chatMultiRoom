@@ -2,7 +2,7 @@ const Room = require('../../model/room');
 
 module.exports = {
     async create(req, res) {
-        const room = await Room.create({});
+        const room = await Room.create(req.body);
         res.json({ room: room._id });
     },
     async get(req, res) {
