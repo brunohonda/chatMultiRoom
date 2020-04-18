@@ -6,7 +6,10 @@ const userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    online: Boolean,
+    online: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Room'
+    },
     avatar: {
         type: String,
         required: false
