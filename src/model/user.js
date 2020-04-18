@@ -11,14 +11,8 @@ const userSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    lastConnection: {
-        type: Date,
-        default: Date.now
-    },
-    lastDisconnection: {
-        reason: String,
-        datetime: Date
-    }
+    lastConnection: Date,
+    lastDisconnection: Date
 });
 
 module.exports = mongoose.model('User', userSchema);
