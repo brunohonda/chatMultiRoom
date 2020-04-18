@@ -29,21 +29,31 @@ async function joinToRoom(socket) {
     try {
         const user = await findUser(socket);
         const room = await findRoom(socket, user);
+        
+        await user.updateOne({ online: room });
         const users = await User.find({ _id: { $in: room.users }});
         const namespace = await socket.join(room._id).emit('roomUsers', users);
-        user.updateOne({ online: room });
-        
+
         socket.to(socket.handshake.query.room).emit('roomUsers', users);
-        return namespace;
+        return { namespace, room, user };
     } catch(error) {
         socket.disconnect(true);
     }
 }
 
+function disconnect(sockets, socket, room, user) {
+    return async (reason) => {
+        await user.updateOne({ online: undefined, lastDisconnection: new Date() });
+        sockets.to(room._id).emit('userLeave', user);
+    };
+}
+
 module.exports = (sockets) => {
     return {
         connection: async (socket) => {
-            await joinToRoom(socket);
+            const { room, user } = await joinToRoom(socket);
+
+            socket.on('disconnect', disconnect(sockets, socket, room, user));
             
             socket.on('message', async (data) => {
                 Room.findByIdAndUpdate(
