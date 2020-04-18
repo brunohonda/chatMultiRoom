@@ -1,19 +1,14 @@
 const mongoose = require('mongoose');
 
 const roomSchema = mongoose.Schema({
-    reference: {
-        type: String,
-        required: false,
-        unique: true
-    },
     users: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Users'
+        ref: 'User'
     }],
     messages: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Users',
+            ref: 'User',
             required: true
         },
         text: {
