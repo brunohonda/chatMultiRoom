@@ -56,7 +56,7 @@ function renderUsers(data) {
                 </div>
                 <div class="col-md-10">
                     <div class="card-body p-0">
-                    <h5 class="card-title" style="margin: .65rem">${roomUser.internalReference}</h5>
+                    <h5 class="card-title" style="margin: .65rem">${roomUser.reference}</h5>
                     </div>
                 </div>
             </div>

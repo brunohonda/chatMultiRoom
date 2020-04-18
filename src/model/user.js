@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = mongoose.Schema({
-    internalReference: {
+    reference: {
         type: String,
         required: true,
         unique: true
