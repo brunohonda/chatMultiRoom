@@ -3,6 +3,7 @@ const roomRouting = require('./module/room/room.routing');
 const router = express.Router();
 
 router.get('/', (req, res) => { res.render('index.html'); });
+router.use('/api', require('./service/authorization.service').validate);
 router.use('/api', express.json());
 router.use('/api/room', roomRouting);
 

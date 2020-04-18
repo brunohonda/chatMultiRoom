@@ -8,5 +8,8 @@ module.exports = {
         user: process.env.MONGO_USER || 'rankdone',
         password: process.env.MONGO_PASSWD || 'r4bb1TmqR4nkD0n3',
         database: process.env.MONGO_DB_NAME || 'rankdone-chat'
+    },
+    jwt: {
+        secret: process.env.JWT_SECRET || 'your-256-bit-secret'
     }
 };
