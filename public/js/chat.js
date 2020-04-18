@@ -19,6 +19,7 @@ function connect(event) {
 
     socket.on('response', renderMessage);
     socket.on('roomUsers', renderUsers);
+    socket.on('userLeave', userLeave);
 
     $('#message').focus();
     showTab('chat-tab');
@@ -46,13 +47,17 @@ function renderMessage(data) {
 }
 
 function renderUsers(data) {
+
     $('#users').empty();
     data.forEach(roomUser => {
+        const cardClass = roomUser.online ? '' : 'bg-secondary text-white';
+        const cardImageClass = roomUser.online ? '' : 'grayscale';
+
         $('#users').append(`
-        <div class="card m-2">
+        <div class="card m-2 ${cardClass}" id="user_${roomUser._id}">
             <div class="row no-gutters">
                 <div class="col-md-2">
-                    <img src="https://picsum.photos/64" class="card-img" alt="avatar">
+                    <img src="https://picsum.photos/64" class="card-img ${cardImageClass}" alt="avatar">
                 </div>
                 <div class="col-md-10">
                     <div class="card-body p-0">
@@ -63,6 +68,11 @@ function renderUsers(data) {
         </div>
         `);
     });
+}
+
+function userLeave(data) {
+    $(`#user_${data._id}`).addClass('bg-secondary text-white');
+    $(`#user_${data._id} .card-img`).addClass('grayscale');
 }
 
 function load() {

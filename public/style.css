@@ -8,6 +8,10 @@
   max-width: 64px;
 }
 
+.grayscale {
+  filter: grayscale(100%);
+}
+
 #users {
   width: 300px;
 }
