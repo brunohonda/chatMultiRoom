@@ -31,6 +31,7 @@ async function joinToRoom(socket) {
         const room = await findRoom(socket, user);
         const users = await User.find({ _id: { $in: room.users }});
         const namespace = await socket.join(room._id).emit('roomUsers', users);
+        user.updateOne({ online: room });
         
         socket.to(socket.handshake.query.room).emit('roomUsers', users);
         return namespace;
