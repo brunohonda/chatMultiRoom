@@ -3,6 +3,7 @@ version: '3'
 services:
     chat:
         image: node
+        container_name: chat-server
         working_dir: /home/node/app
         environment:
             - NODE_ENV=production
@@ -15,6 +16,7 @@ services:
             - mongo
     mongo:
         image: mongo
+        container_name: chat-mongo
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: CVx9AxxCZwkx
@@ -24,6 +26,7 @@ services:
             - mongo_db-data:/data/db
     mongo-express:
         image: mongo-express
+        container_name: chat-mongo-express
         ports:
             - "8081:8081"
         environment:
