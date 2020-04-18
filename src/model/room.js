@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const User = require('./user');
 
 const roomSchema = mongoose.Schema({
     reference: {
