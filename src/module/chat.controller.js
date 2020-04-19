@@ -56,12 +56,12 @@ module.exports = (sockets) => {
             socket.on('disconnect', disconnect(sockets, socket, room, user));
             
             socket.on('message', async (data) => {
-                Room.findByIdAndUpdate(
+                await Room.findByIdAndUpdate(
                     socket.handshake.query.room,
                     {
                         $push: {
                             messages: {
-                                $each: [{ user: { _id: '5e9a4d4f9d4c2d0006edb33a' }, text: data.message }]
+                                $each: [{ user, text: data.message }]
                             }
                         }
                     }
