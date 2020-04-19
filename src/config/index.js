@@ -6,7 +6,7 @@ module.exports = {
         host: process.env.MONGO_HOST || 'mongo',
         port: process.env.MONGO_PORT || '27017',
         user: process.env.MONGO_USER || 'rankdone',
-        password: process.env.MONGO_PASSWD || 'r4bb1TmqR4nkD0n3',
+        password: process.env.MONGO_PASSWD || 'vgrp0RBDvWAFU4mHytUqthssMlXHKgfV',
         database: process.env.MONGO_DB_NAME || 'rankdone-chat'
     },
     jwt: {
